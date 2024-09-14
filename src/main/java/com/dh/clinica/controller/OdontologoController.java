@@ -1,6 +1,6 @@
 package com.dh.clinica.controller;
 
-import com.dh.clinica.model.Odontologo;
+import com.dh.clinica.entity.Odontologo;
 import com.dh.clinica.service.OdontologoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,7 +17,7 @@ public class OdontologoController {
 
     @GetMapping("/buscarO")
     public String Odontologo(Model model, @RequestParam Integer id){
-        Odontologo odontologo = odontologoService.buscarPorId(id);
+        Odontologo odontologo = odontologoService.buscarPorId(id).get();
         model.addAttribute("apellidoOdont", odontologo.getApellido());
         model.addAttribute("matriculaOdont",odontologo.getMatricula());
         return "odontologo";

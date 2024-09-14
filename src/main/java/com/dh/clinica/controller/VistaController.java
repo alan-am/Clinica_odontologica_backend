@@ -1,6 +1,6 @@
 package com.dh.clinica.controller;
 
-import com.dh.clinica.model.Paciente;
+import com.dh.clinica.entity.Paciente;
 import com.dh.clinica.service.PacienteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ public class VistaController {
     // localhost:8080?id=1 @RequestParams
     @GetMapping("/index")
     public String mostrarPacientePorId(Model model, @RequestParam Integer id){ //debo indicarque como voy a recibir la info
-        Paciente paciente = pacienteService.buscarPorId(id);
+        Paciente paciente = pacienteService.buscarPorId(id).get();//get para obtener el objeto del Optional
         model.addAttribute("nombrePaciente", paciente.getNombre());
                             // nombrede la variable definida, atributo a traves del metodo get
         model.addAttribute("apellidoPaciente", paciente.getApellido());
