@@ -1,5 +1,7 @@
 package com.dh.clinica.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -24,10 +26,13 @@ public class Paciente {
     private String dni;
     private LocalDate fechaIngreso;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+
     private Domicilio domicilio;
 
-    @OneToMany
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.REMOVE)
+    //@JsonManagedReference(value = "paciente-turno")
+    @JsonIgnore
     private Set<Turno> turnoSet;
 
     @Override
